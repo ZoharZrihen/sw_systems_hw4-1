@@ -12,7 +12,40 @@ typedef struct node{
 	long unsigned int count;
 	struct node* children[NUM_LETTERS];
 } node;
+node* trie;
+boolean readWords(){
+	char* word=NULL;
+		char* temp=NULL;
+		int i=0;
+		int size=1;
+		word = (char*)malloc(1);	//init input size of one char
+		if (scanf("%c",&word[i])!=1) return FALSE;
+		while (word[i]!= '\n'){
+			size++;		//more chars in STDIN - increase size of string
+			temp = (char*)realloc(word,size+1);
+			if (temp == NULL){	//try to reallocate into new space
+				free(word);
+				return FALSE;	//realloc failed, return false
+			}
+			word = temp;
+			i++;	//next index for char input
+			scanf("%c",&word[i]);
+			if (word[i] == ' ') {
+				word[i] = '\0';	//set end of word
+				insert (trie,word);	//add word to tree
+				free(word);	//free memory of last word
+				size=1;
+				i=0;	//set index and size for new word
+				word = (char*)malloc(1);	//allocate memory for new word
+				if(scanf("%c",&word[i])!=1) return FALSE;
+			}
 
+		}
+		word[i]='\0';	//end of STDIN, set end of word
+		insert(trie,word);	//add last word
+		free(word);	//free memory of last word
+		return TRUE;
+}
 struct node* init(){
 	node* nuNode = NULL;
 	nuNode = (node *)malloc(sizeof(node));

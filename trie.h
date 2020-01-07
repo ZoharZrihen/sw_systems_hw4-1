@@ -13,4 +13,6 @@ typedef enum {FALSE=0, TRUE=1} boolean;
 node* init();
 boolean insert(node*,char*);
 void killTree(node*);
+extern node* trie;
+boolean readWords();
 #endif /* TRIE_H_ */

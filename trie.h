@@ -10,9 +10,12 @@
 #define NUM_LETTERS 26
 typedef struct node node;
 typedef enum {FALSE=0, TRUE=1} boolean;
-node* init();
-boolean insert(node*,char*);
-void killTree(node*);
 extern node* trie;
+node* init();
+boolean insert(char*);
+void killTree(node*);
 boolean readWords();
+void printTrie(boolean);
+void printTree(node*,char*, int);
+void printTreeR(node*,char* ,int);
 #endif /* TRIE_H_ */
